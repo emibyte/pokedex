@@ -1,10 +1,28 @@
 package main
 
-import "strings"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
 func cleanInput(text string) []string {
 	lower := strings.ToLower(text)
 	// NOTE: Fields does the thing that i just did manually before (also catches tabs and stuff)
 	words := strings.Fields(lower)
 	return words
+}
+
+func startRepl() {
+	scanner := bufio.NewScanner(os.Stdin)
+	for {
+		fmt.Print("Pokedex > ")
+		scanner.Scan()
+		words := cleanInput(scanner.Text())
+		if len(words) == 0 {
+			continue
+		}
+		fmt.Printf("Your command was: %s\n", words[0])
+	}
 }
