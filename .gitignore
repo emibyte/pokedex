@@ -34,6 +34,9 @@ go.work.sum
 # executable
 pokedex
 
+# logs
+repl.log
+
 # Editor/IDE
 # .idea/
 # .vscode/
