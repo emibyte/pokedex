@@ -31,6 +31,9 @@ go.work.sum
 .direnv
 .envrc
 
+# executable
+pokedex
+
 # Editor/IDE
 # .idea/
 # .vscode/
