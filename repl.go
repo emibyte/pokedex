@@ -15,6 +15,7 @@ func cleanInput(text string) []string {
 }
 
 func startRepl() {
+	initCommandRegistry()
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
@@ -23,6 +24,16 @@ func startRepl() {
 		if len(words) == 0 {
 			continue
 		}
-		fmt.Printf("Your command was: %s\n", words[0])
+
+		command := words[0]
+		cmd, exists := registry.commands[command]
+		if exists {
+			err := cmd.callback()
+			if err != nil {
+				fmt.Println(err)
+			}
+		} else {
+			fmt.Println("Unknown command")
+		}
 	}
 }
