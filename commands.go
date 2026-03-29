@@ -29,7 +29,7 @@ var registry = commandRegistry{
 func initCommandRegistry() {
 	registerCommand(registry, "exit", "Exit the Pokedex", commandExit)
 	registerCommand(registry, "help", "Displays a help message", commandHelp)
-	registerCommand(registry, "map", "", commandMap)
+	registerCommand(registry, "map", "Displays the name of 20 location areas, each subsequent call displays the next 20", commandMap)
 }
 
 func registerCommand(registry commandRegistry, name, description string, callback func(*config) error) error {
