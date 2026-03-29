@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
+
+	"github.com/emibyte/pokedex/internal/pokeapi"
 )
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(config *config) error
+}
+
+type config struct {
+	pokeapiClient pokeapi.Client
+	nextUrl       *string
+	previousUrl   *string
 }
 
 type commandRegistry struct {
@@ -23,9 +29,10 @@ var registry = commandRegistry{
 func initCommandRegistry() {
 	registerCommand(registry, "exit", "Exit the Pokedex", commandExit)
 	registerCommand(registry, "help", "Displays a help message", commandHelp)
+	registerCommand(registry, "map", "", commandMap)
 }
 
-func registerCommand(registry commandRegistry, name, description string, callback func() error) error {
+func registerCommand(registry commandRegistry, name, description string, callback func(*config) error) error {
 	cmd := cliCommand{
 		name:        name,
 		description: description,
@@ -37,21 +44,4 @@ func registerCommand(registry commandRegistry, name, description string, callbac
 		return nil
 	}
 	return fmt.Errorf("command %s has already been added to the registry", name)
-}
-
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp() error {
-	var sb strings.Builder
-	beginning := "Welcome to the Pokedex!\nUsage:\n\n"
-	sb.WriteString(beginning)
-	for _, cmd := range registry.commands {
-		fmt.Fprintf(&sb, "%s: %s\n", cmd.name, cmd.description)
-	}
-	fmt.Println(sb.String())
-	return nil
 }
