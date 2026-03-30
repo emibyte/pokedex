@@ -9,7 +9,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(config *config) error
+	callback    func(config *config, args ...string) error
 }
 
 type config struct {
@@ -31,9 +31,10 @@ func initCommandRegistry() {
 	registerCommand(registry, "help", "Displays a help message", commandHelp)
 	registerCommand(registry, "map", "Get the next page of locations", commandMap)
 	registerCommand(registry, "mapb", "Get the previous page of locations", commandMapb)
+	registerCommand(registry, "explore", "Get the pokemon for a location area", commandExplore)
 }
 
-func registerCommand(registry commandRegistry, name, description string, callback func(*config) error) error {
+func registerCommand(registry commandRegistry, name, description string, callback func(*config, ...string) error) error {
 	cmd := cliCommand{
 		name:        name,
 		description: description,

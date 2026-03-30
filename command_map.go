@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandMap(config *config) error {
+func commandMap(config *config, _ ...string) error {
 	locs, err := config.pokeapiClient.ListLocations(config.nextUrl)
 	if err != nil {
 		return err

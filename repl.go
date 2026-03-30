@@ -33,9 +33,10 @@ func startRepl() {
 		}
 
 		command := words[0]
+		args := words[1:]
 		cmd, exists := registry.commands[command]
 		if exists {
-			err := cmd.callback(&config)
+			err := cmd.callback(&config, args...)
 			if err != nil {
 				fmt.Println(err)
 			}

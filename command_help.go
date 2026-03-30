@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func commandHelp(_ *config) error {
+func commandHelp(_ *config, _ ...string) error {
 	var sb strings.Builder
 	beginning := "Welcome to the Pokedex!\nUsage:\n\n"
 	sb.WriteString(beginning)
