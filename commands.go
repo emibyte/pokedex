@@ -34,6 +34,7 @@ func initCommandRegistry() {
 	registerCommand(registry, "mapb", "Get the previous page of locations", commandMapb)
 	registerCommand(registry, "explore", "Get the pokemon for a location area", commandExplore)
 	registerCommand(registry, "catch", "Attempt to catch a pokemon", commandCatch)
+	registerCommand(registry, "inspect", "Inspect a pokemon in your pokedex", commandInspect)
 }
 
 func registerCommand(registry commandRegistry, name, description string, callback func(*config, ...string) error) error {
