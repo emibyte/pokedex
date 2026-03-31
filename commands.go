@@ -14,6 +14,7 @@ type cliCommand struct {
 
 type config struct {
 	pokeapiClient pokeapi.Client
+	pokedex       map[string]pokeapi.Pokemon
 	nextUrl       *string
 	previousUrl   *string
 }
@@ -32,6 +33,7 @@ func initCommandRegistry() {
 	registerCommand(registry, "map", "Get the next page of locations", commandMap)
 	registerCommand(registry, "mapb", "Get the previous page of locations", commandMapb)
 	registerCommand(registry, "explore", "Get the pokemon for a location area", commandExplore)
+	registerCommand(registry, "catch", "Attempt to catch a pokemon", commandCatch)
 }
 
 func registerCommand(registry commandRegistry, name, description string, callback func(*config, ...string) error) error {

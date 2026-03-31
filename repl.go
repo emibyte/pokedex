@@ -21,6 +21,7 @@ func startRepl() {
 	initCommandRegistry()
 	config := config{
 		pokeapiClient: pokeapi.NewClient(time.Second * 5),
+		pokedex:       make(map[string]pokeapi.Pokemon),
 	}
 	scanner := bufio.NewScanner(os.Stdin)
 
