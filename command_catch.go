@@ -29,6 +29,7 @@ func commandCatch(config *config, args ...string) error {
 	roll := rand.Intn(difficulty + 1)
 	if roll == 0 {
 		fmt.Println(pokemon.Name, "was caught!")
+		fmt.Println("You may now inspect it with the inspect command.")
 		config.pokedex[pokemon.Name] = pokemon
 	} else {
 		fmt.Println(pokemon.Name, "was not caught, try again!")
