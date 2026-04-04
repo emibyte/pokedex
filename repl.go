@@ -1,12 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
 	"time"
 
+	"github.com/chzyer/readline"
 	"github.com/emibyte/pokedex/internal/pokeapi"
 )
 
@@ -23,12 +22,22 @@ func startRepl() {
 		pokeapiClient: pokeapi.NewClient(time.Second * 5),
 		pokedex:       make(map[string]pokeapi.Pokemon),
 	}
-	scanner := bufio.NewScanner(os.Stdin)
+	// TODO: implement this myself way too big of a dependency just for command history tbh
+	rl, err := readline.New("Pokedex > ")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer rl.Close()
 
 	for {
-		fmt.Print("Pokedex > ")
-		scanner.Scan()
-		words := cleanInput(scanner.Text())
+		line, err := rl.Readline()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		words := cleanInput(line)
 		if len(words) == 0 {
 			continue
 		}
