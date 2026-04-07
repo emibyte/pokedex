@@ -3,10 +3,8 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/chzyer/readline"
-	"github.com/emibyte/pokedex/internal/pokeapi"
 )
 
 func cleanInput(text string) []string {
@@ -16,12 +14,7 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func startRepl() {
-	initCommandRegistry()
-	config := config{
-		pokeapiClient: pokeapi.NewClient(time.Second * 5),
-		pokedex:       make(map[string]pokeapi.Pokemon),
-	}
+func startRepl(config *config) {
 	// TODO: implement this myself way too big of a dependency just for command history tbh
 	rl, err := readline.New("Pokedex > ")
 	if err != nil {
@@ -46,7 +39,7 @@ func startRepl() {
 		args := words[1:]
 		cmd, exists := registry.commands[command]
 		if exists {
-			err := cmd.callback(&config, args...)
+			err := cmd.callback(config, args...)
 			if err != nil {
 				fmt.Println(err)
 			}

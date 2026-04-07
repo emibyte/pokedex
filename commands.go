@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/emibyte/pokedex/internal/pokeapi"
+	"github.com/emibyte/pokedex/internal/pokepersistence"
 )
 
 type cliCommand struct {
@@ -17,6 +18,7 @@ type config struct {
 	pokedex       map[string]pokeapi.Pokemon
 	nextUrl       *string
 	previousUrl   *string
+	repo          pokepersistence.Repository
 }
 
 type commandRegistry struct {
