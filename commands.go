@@ -15,10 +15,10 @@ type cliCommand struct {
 
 type config struct {
 	pokeapiClient pokeapi.Client
+	repo          pokepersistence.Repository
 	pokedex       map[string]pokeapi.Pokemon
 	nextUrl       *string
 	previousUrl   *string
-	repo          pokepersistence.Repository
 }
 
 type commandRegistry struct {
