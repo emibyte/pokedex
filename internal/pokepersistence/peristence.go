@@ -7,6 +7,8 @@ import (
 )
 
 // NOTE: struct that contains everything in the config we intend to persist somewhere
+// this and config needs to match up with each other
+// (haven't thought of an easier way to do this yet sadly, maybe some reflection stuff?)
 type UserData struct {
 	Pokedex     map[string]pokeapi.Pokemon
 	NextUrl     *string
@@ -20,6 +22,7 @@ func LoadUserData(repo Repository) (*UserData, error) {
 	}
 
 	if len(state) == 0 {
+		// NOTE: if there is no file (content empty), return the 0 value of UserData
 		return &UserData{
 			Pokedex:     make(map[string]pokeapi.Pokemon),
 			NextUrl:     nil,
