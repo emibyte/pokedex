@@ -1,6 +1,6 @@
 module github.com/emibyte/pokedex
 
-go 1.26.1
+go 1.27.3
 
 require github.com/chzyer/readline v1.5.1
 
